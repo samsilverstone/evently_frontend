@@ -1,0 +1,15 @@
+.navlink{
+    list-style-type: none;
+    border:1px solid green;
+    display:flex;
+    flex-direction:row;
+}
+.navlink>li{
+    padding-left:10px;
+}
+.Header{
+    border:1px solid red;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

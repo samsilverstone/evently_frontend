@@ -1,0 +1,25 @@
+.signuppage{
+    border:1px solid red;
+    width:600px;
+    margin:auto;
+}
+
+.remember{
+    font-size: 16px;
+    margin-left:7px;
+}
+
+.forgotPass{
+    font-size:16px;
+}
+
+.down{
+    display:flex;
+    // flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.noaccount{
+    font-size:16px;
+}
