@@ -104,7 +104,7 @@ export const forgotPassword = (username) => {
             })
             .then(res => {
                 if (res.status == 200) {
-                    dispatch({ type: "FORGOT_PASSWORD" })
+                    dispatch({ type: "USER_FOUND" })
                 }
             })
     }

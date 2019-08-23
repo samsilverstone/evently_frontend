@@ -11,7 +11,7 @@ export default class ForgotPass extends React.Component {
     }
     onSubmit(e) {
         e.preventDefault()
-
+        
     }
     render() {
         return (
