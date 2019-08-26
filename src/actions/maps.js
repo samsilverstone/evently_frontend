@@ -1,7 +1,7 @@
 export const nearby = (location, category) => {
     return (dispatch, getState) => {
         // let headers = {  }
-        let key = 'AIzaSyA4mI-Wb-OWrtHlste2j8GbuFdD4CvzYbQ'
+        let key = 'AIzaSyA4mI-Wb-OWrtHlste2j8GbuFdDCvzYQ'
         let myHeaders = new Headers({
             'content-type': 'application/json'
         });
