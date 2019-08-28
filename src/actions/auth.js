@@ -1,5 +1,6 @@
 export const login = (username, password) => {
     return (dispatch, getState) => {
+        dispatch({ type: "USER_LOADING" });
         let headers = { "Content-Type": "application/json" };
         let body = JSON.stringify({ username, password });
 

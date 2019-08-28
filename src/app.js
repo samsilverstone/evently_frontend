@@ -9,7 +9,7 @@ import NotFoundPage from './components/NotFoundPage';
 import ForgotPass from './components/forgotpassword';
 import ResetPassword from './components/ResetPassword';
 import './Styles/styles.scss';
-
+import Results from './components/results';
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from 'react-redux';
@@ -26,6 +26,7 @@ const routes = (
                 <Route exact path="/signup" component={SignUp} />
                 <Route exact path="/passreset" component={ResetPassword} />
                 <Route exact path="/forgotpassword" component={ForgotPass} />
+                <Route exact path="/results" component={Results} />
                 <Route component={NotFoundPage} />
             </Switch>
         </BrowserRouter>

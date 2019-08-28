@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, FormGroup, Input, Button } from 'reactstrap';
 import { nearby } from '../actions/maps';
 import { connect } from 'react-redux';
+import { withRouter, Redirect } from 'react-router';
 
 class Location extends React.Component {
     constructor(props) {
@@ -15,6 +16,7 @@ class Location extends React.Component {
     onSubmit(e) {
         e.preventDefault()
         this.props.nearby(this.state.Location, this.state.Category)
+        this.props.history.push("/results")
     }
     render() {
         return (
@@ -54,4 +56,4 @@ const mapDispatchToProps = (dispatch) => ({
     nearby: (category, location) => dispatch(nearby(category, location))
 })
 
-export default connect(null, mapDispatchToProps)(Location)
+export default withRouter(connect(null, mapDispatchToProps)(Location))
