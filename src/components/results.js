@@ -18,7 +18,7 @@ class Results extends React.Component {
         return (
             <React.Fragment>
                 <div className="container">
-                    {this.props.nearbyData.length > 0 ? <p>hello</p> : <p>bye</p>}
+                    // {this.props.nearbyData.length > 0 ? <p>hello</p> : <p>bye</p>}
                 </div>
             </React.Fragment>
         )
