@@ -9,7 +9,7 @@ import NotFoundPage from './components/NotFoundPage';
 import ForgotPass from './components/forgotpassword';
 import ResetPassword from './components/ResetPassword';
 import './Styles/styles.scss';
-import Results from './components/results';
+import Results from './components/Results';
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from 'react-redux';
