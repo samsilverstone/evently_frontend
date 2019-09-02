@@ -3,19 +3,15 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-redux';
 import Result from './Result';
 import debounce from 'lodash.debounce';
+import Loader from './loader';
 import axios from 'axios';
 
 class Results extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            error: false,
-            hasMore: true,
             isLoading: false,
-            users: [],
-            next_page_token: null
         }
-
         this.affordable = this.affordable.bind(this)
         this.loadData = this.loadData.bind(this)
 
@@ -23,29 +19,30 @@ class Results extends React.Component {
             const {
                 loadData,
                 state: {
-                    error,
                     isLoading,
-                    hasMore,
                 },
             } = this
 
-            if (error || isLoading || !hasMore) return
+            if (isLoading) return
             if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
                 loadData();
             }
-        }, 100)
+        }, 1000)
     }
 
-    componentDidMount(){
-        this.setState({next_page_token:   })
-    }
     loadData() {
+        console.log(this.props.next_page_token)
         this.setState({ isLoading: true }, () => {
-            axios.get(`http://127.0.0.1:8000/user/nextpagedetail/?next_page_token=${this.state.next_page_token}`)
-                .then((response) => {
-                    this.props.loadData(response.data)   +++
-                    this.setState({ next_page_token: response.data.nextpagetoken })
-                })
+            if (this.props.next_page_token !== null) {
+                axios.get(`http://127.0.0.1:8000/user/nextpagedetail/?next_page_token=${this.props.next_page_token}`)
+                    .then((response) => {
+                        this.props.loadData(response.data)
+                        this.setState({ isLoading: false })
+                    })
+                    .catch((err) => {
+                        console.log(err)
+                    })
+            }
         })
     }
 
@@ -61,7 +58,7 @@ class Results extends React.Component {
 
     render() {
         if (this.props.isLoading) {
-            return <h1>Hello</h1>
+            return <Loader />
         }
         return (
             <React.Fragment>
@@ -71,6 +68,7 @@ class Results extends React.Component {
             </React.Fragment>
         )
     }
+
 }
 
 const mapStateToProps = (state, ownprops) => {
@@ -81,7 +79,8 @@ const mapStateToProps = (state, ownprops) => {
     }
     return {
         nearbydata: state.location.nearbyData,
-        isLoading: state.location.isLoading
+        isLoading: state.location.isLoading,
+        next_page_token: state.location.next_page_token
     }
 }
 

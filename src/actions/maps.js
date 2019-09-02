@@ -8,7 +8,6 @@ export const nearby = (location, category, feature) => {
             axios.get(`http://127.0.0.1:8000/user/placedetail/?location=${location}&category=${category}&radius=10000`)
                 .then((response) => {
                     if (response.status === 200) {
-                        console.log(response.data)
                         dispatch({ type: 'DATA LOADED', data: response.data })
                     }
                 })

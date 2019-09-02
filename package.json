@@ -17,7 +17,9 @@
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-preset-env": "1.5.2",
     "babel-preset-react": "6.24.1",
+    "babel-upgrade": "^1.0.1",
     "bootstrap": "^4.3.1",
+    "classnames": "^2.2.6",
     "css": "^2.2.4",
     "css-loader": "0.28.4",
     "live-server": "^1.2.1",
@@ -35,10 +37,12 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "style-loader": "0.18.2",
+    "styled-components": "^4.3.2",
     "validator": "^11.0.0",
     "webpack-dev-server": "2.5.1"
   },
   "devDependencies": {
+    "@babel/plugin-transform-spread": "^7.2.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "file-loader": "^4.2.0",
     "node-sass": "^4.12.0",

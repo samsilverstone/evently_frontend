@@ -1,5 +1,5 @@
 const initialState = {
-    nearbyData: null,
+    nearbyData: [],
     isLoading: true,
     next_page_token: null
 }
@@ -10,7 +10,8 @@ export default function (state = initialState, action) {
             return { ...state, isLoading: true }
         case 'NEXT_PAGE_DATA':
         case 'DATA LOADED':
-            return { ...state, nearbyData: action.data.data, next_page_token: action.data.next_page_token, isLoading: false }
+            console.log(action.data.nextpagetoken)
+            return { nearbyData: state.nearbyData.concat(action.data.data), next_page_token: action.data.nextpagetoken, isLoading: false }
 
         default:
             return state
