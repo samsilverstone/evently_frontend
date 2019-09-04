@@ -63,7 +63,7 @@ class Results extends React.Component {
         return (
             <React.Fragment>
                 <div className="result">
-                    {this.props.nearbydata.length > 0 ? this.props.nearbydata.map((item, index) => <Result key={index} data={item} serial={index + 1} compute={this.affordable} />) : undefined}
+                    {this.props.nearbydata.length > 0 ? this.props.nearbydata.map((item, index) => <Result key={index} data={item} origin={this.props.origin} serial={index + 1} compute={this.affordable} />) : undefined}
                 </div>
             </React.Fragment>
         )
@@ -80,7 +80,8 @@ const mapStateToProps = (state, ownprops) => {
     return {
         nearbydata: state.location.nearbyData,
         isLoading: state.location.isLoading,
-        next_page_token: state.location.next_page_token
+        next_page_token: state.location.next_page_token,
+        origin: state.location.origin
     }
 }
 

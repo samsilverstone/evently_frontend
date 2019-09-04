@@ -6,7 +6,7 @@ import locationDetails from './reducers/locationDetails';
 const App = combineReducers({
     auth,
     location,
-    locationDetails
+    locationDetails,
 })
 
 export default App
