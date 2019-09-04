@@ -7,32 +7,48 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import PlaceDetails from './PlaceDetails';
 import MapViewModal from './MapViewModal';
+import Loader from './loader';
+
 
 class Result extends React.Component {
     constructor(props) {
         super(props)
         this.loadDetails = this.loadDetails.bind(this)
         this.state = {
+            loader: false,
             isOpen: false,
             origin: null,
-            destination: null
+            destination: null,
+            image: null
         }
         this.modalOpen = this.modalOpen.bind(this)
         this.modalClose = this.modalClose.bind(this)
     }
+
     loadDetails() {
         axios.get(`http://127.0.0.1:8000/user/individualplace?place_id=${this.props.data.place_id}`)
             .then((response) => {
                 this.props.fetchDetails(response.data)
             })
     }
+
     modalOpen() {
-        this.setState({
-            isOpen: true,
-            origin: this.props.origin,
-            destination: this.props.data.destination
-        })
+        this.setState({ loader: true })
+        const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        fetch(proxyurl + `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${this.props.data.photo}&key=AIzaSyA4mI-Wb-OWrtHlste2j8GbuFdD4CvzYbQ`)
+            .then((response) => response.blob())
+            .then(images => {
+                let image = URL.createObjectURL(images)
+                this.setState({
+                    isOpen: true,
+                    origin: this.props.origin,
+                    destination: this.props.data.destination,
+                    loader: false,
+                    image
+                })
+            })
     }
+
     modalClose() {
         this.setState({
             isOpen: false
@@ -51,10 +67,11 @@ class Result extends React.Component {
                         {this.props.data.user_ratings_total ? <li className="list-group-item"><span className="font-weight-bold w-25">Total Ratings:</span>{this.props.data.user_ratings_total}</li> : <li className="list-group-item"><span className="font-weight-bold w-25">Total Ratings:</span>No One Rated Yet</li>}
                     </ul>
                     <Button onClick={this.modalOpen}>Map View</Button>
-                    <MapViewModal
+                    {this.state.loader && <Loader />}
+                    {this.state.isOpen && <MapViewModal
                         isModalVisible={this.state}
                         isModalClosed={this.modalClose}
-                    />
+                    />}
                     {this.props.isLoading || !(this.props.locationInfo.place_id === this.props.data.place_id) ? <Button onClick={this.loadDetails}>Show More</Button> : <PlaceDetails loadedData={this.props.locationInfo} />}
                 </Card>
             </React.Fragment>
