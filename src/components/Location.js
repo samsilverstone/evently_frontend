@@ -24,18 +24,20 @@ class Location extends React.Component {
             <React.Fragment>
                 <Form onSubmit={this.onSubmit}>
                     <FormGroup className="location_search p-3">
-                        <Input
-                            placeholder="What are you looking for?"
-                            className="form-control"
+                        <input
+                            placeholder="Where are you now?"
+                            className="form-control form-control-lg"
                             onChange={e => (this.setState({
                                 "Location": e.target.value
-                            }))} />
+                            }))}
+                            required
+                        />
 
                         <Input
                             type="select"
                             name="selectMulti"
                             id="categories"
-                            className="mt-3"
+                            className="mt-3 form-control-lg"
                             onChange={e => (this.setState({ "Category": e.target.value }))}>
                             <option value="restaurant">Restaurant</option>
                             <option value="hospital">Hospital</option>
@@ -48,13 +50,13 @@ class Location extends React.Component {
                             type="select"
                             name="selectFeature"
                             id="features"
-                            className="mt-3"
+                            className="mt-3 form-control-lg"
                             onChange={e => (this.setState({ "Feature": e.target.value }))}>
                             <option value="prominent">Prominent</option>
                             <option value="nearby">Nearby</option>
                         </Input>
 
-                        <Button className="btn btn-md mt-3 btn-success">
+                        <Button className="btn btn-lg mt-3 btn-success">
                             <span><i className="fa fa-search mr-1" aria-hidden="true" /></span>Search
                         </Button>
 

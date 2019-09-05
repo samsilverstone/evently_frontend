@@ -39,12 +39,15 @@ class Result extends React.Component {
             .then((response) => response.blob())
             .then(images => {
                 let image = URL.createObjectURL(images)
-                this.setState({
-                    isOpen: true,
-                    origin: this.props.origin,
-                    destination: this.props.data.destination,
-                    loader: false,
-                    image
+                this.setState((prevSate) => {
+
+                    return {
+                        isOpen: true,
+                        origin: this.props.origin,
+                        destination: this.props.data.destination || prevSate.destination,
+                        loader: false,
+                        image
+                    }
                 })
             })
     }

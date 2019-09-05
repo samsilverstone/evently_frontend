@@ -1,5 +1,6 @@
 @import './base/settings';
 @import './base/base';
+@import './components/app';
 @import './components/_signuppage';
 @import './components/_homepage';
 @import './components/_loginpage';
@@ -8,3 +9,5 @@
 @import './components/reset_pass';
 @import './components/location_search';
 @import './components/result';
+@import './components/heading';
+@import './components/mainpage';

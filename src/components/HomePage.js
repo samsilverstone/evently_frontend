@@ -1,7 +1,6 @@
 import React from 'react';
 import Header from './Header';
 import Logout from './Logout';
-import Location from './Location';
 import { connect } from 'react-redux';
 
 class HomePage extends React.Component {
@@ -9,7 +8,6 @@ class HomePage extends React.Component {
         return (
             <React.Fragment>
                 <Header />
-                <Location />
                 {this.props.isAuthenticated && <Logout />}
             </React.Fragment>
         )
