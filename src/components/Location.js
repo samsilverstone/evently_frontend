@@ -3,6 +3,8 @@ import { Form, FormGroup, Input, Button } from 'reactstrap';
 import { nearby } from '../actions/maps';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router';
+import SelectSearch from 'react-select-search'
+
 
 class Location extends React.Component {
     constructor(props) {
@@ -12,8 +14,32 @@ class Location extends React.Component {
             "Category": "restaurant",
             "Feature": "prominent"
         }
+        this.options = [
+            { name: 'Swedish', value: 'sv' },
+            { name: 'English', value: 'en' },
+            {
+                type: 'group',
+                name: 'Group name',
+                items: [
+                    { name: 'Spanish', value: 'es' },
+                ]
+            },
+        ];
         this.onSubmit = this.onSubmit.bind(this)
+        this.getLocation = this.getLocation.bind(this)
+        this.showPosition = this.showPosition.bind(this)
+
     }
+
+    getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.showPosition)
+        }
+    }
+    showPosition(position) {
+
+    }
+
     onSubmit(e) {
         e.preventDefault()
         this.props.nearby(this.state.Location, this.state.Category, this.state.Feature)
@@ -22,29 +48,21 @@ class Location extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Form onSubmit={this.onSubmit}>
+                <Form onSubmit={this.onSubmit} className="PlaceSearch">
                     <FormGroup className="location_search p-3">
-                        <input
-                            placeholder="Where are you now?"
-                            className="form-control form-control-lg"
-                            onChange={e => (this.setState({
-                                "Location": e.target.value
-                            }))}
-                            required
-                        />
+                        <div className="position-relative">
+                            <input
+                                placeholder="Where are you now?"
+                                className="form-control form-control-lg"
+                                onChange={e => (this.setState({
+                                    "Location": e.target.value
+                                }))}
+                                required
+                            />
+                            <span className="icon_container"><i class="fa fa-map-marker" onClick={this.getLocation}></i></span>
+                        </div>
 
-                        <Input
-                            type="select"
-                            name="selectMulti"
-                            id="categories"
-                            className="mt-3 form-control-lg"
-                            onChange={e => (this.setState({ "Category": e.target.value }))}>
-                            <option value="restaurant">Restaurant</option>
-                            <option value="hospital">Hospital</option>
-                            <option value="hotel">Hotel</option>
-                            <option value="Bars and pubs">Bars and Pubs</option>
-                            <option value="amusement park">Amusement Park</option>
-                        </Input>
+                        <SelectSearch options={this.options} height="0" value="sv" name="language" placeholder="Choose your language" />
 
                         <Input
                             type="select"
