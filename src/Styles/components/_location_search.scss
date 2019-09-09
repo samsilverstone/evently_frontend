@@ -1,17 +1,266 @@
 .location_search{
-    max-width:500px;
+    // max-width:500px;
     margin:auto;
+    display: flex;
+    flex-direction: row;
 }
-
+.location_search>div{
+    padding-top: 14px;
+    padding-left: 52px;
+}
 .icon_container{
     position: absolute;
-    top:3px;
-    right:8px;
-    font-size: 16px;
-    color:black;
+    top: 3px;
+    right: 11px;
+    font-size: 28px;
+    color: black;
     cursor: pointer;
 }
 
-.PlaceSearch{
-    width:400px;
+
+[class*="fontawesome-"]:before {
+    font-family: 'Varela Round', sans-serif;
 }
+
+.types{
+    // width: 250px;
+    height: 50px;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 16px;
+}
+.types>option{
+    font-family: 'Varela Round', sans-serif;
+    padding: 10px;
+}
+.locate{
+    height: 50px;
+    // width: 250px;
+    font-size: 16px;
+    color: darkgrey;
+    font-family: 'Varela Round', sans-serif;
+    padding-left: 18px;
+    padding-right: 38px;
+
+}
+
+.button{
+    height: 50px;
+    width:130px;
+    font-family: 'Varela Round', sans-serif;
+    font-size: 16px;
+    background-color: #efc323;
+    border: none;
+    border-radius: 5px;
+}
+
+.list-items{
+    text-align: center;
+    border: 1px solid #ff3a54;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 200px;
+    padding:10px;
+}
+
+.hotel:before{
+    content:"\f594";
+}
+
+.button:hover{
+    background-color: #2184ff;
+}
+
+.select-search-box {
+    // width: 250px;
+    position: relative;
+    background: #fff;
+    border-radius: 4px;
+}
+
+
+    .select-search-box--multiple {
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .select-search-box::after {
+        font-family: fontawesome;
+        content:"\f078";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 40px;
+        text-align: center;
+        line-height: 50px;
+        color: black;
+        z-index: 1;
+    }
+
+    .select-search-box--multiple::after, .select-search-box--focus::after {
+        content:"\f002";
+        color: #ffb300;
+        font-size: 20px;
+    }
+    
+    .select-search-box__icon--disabled::after {
+        content: none !important;
+    }
+
+    .select-search-box--input::after {
+        display: none !important;
+    }
+
+    .select-search-box__out {
+        display: none;
+    }
+
+    .select-search-box__search {
+        display: block;
+        width: 100%;
+        height: 50px;
+        border: none;
+        background: none;
+        outline: none;
+        font-size: 16px;
+        padding: 0 20px;
+        color: #222f3e;
+        -webkit-appearance: none;
+        box-sizing: border-box;
+        position: relative;
+        z-index: 2;
+        cursor: pointer;
+        font-family: 'Varela Round', sans-serif;
+        line-height: 50px;
+        box-shadow: none;
+        border: 1px solid #ced4da;
+    }
+
+    input.select-search-box__search {
+        line-height: 1;
+    }
+
+    .select-search-box--multiple .select-search-box__search {
+        box-shadow: none;
+    }
+
+    .select-search-box--input .select-search-box__search {
+        cursor: text;
+    }
+
+        .select-search-box__search:focus {
+            cursor: text;
+        }
+
+        .select-search-box__search--placeholder {
+            font-style: italic;
+            font-weight: normal;
+        }
+
+    .select-search-box input::-webkit-input-placeholder {
+        color: #ccc;
+        font-style: italic;
+        font-weight: normal;
+    }
+
+    .select-search-box input::-moz-placeholder {
+        color: #ccc;
+        font-style: italic;
+        font-weight: normal;
+    }
+
+    .select-search-box input:-moz-placeholder {
+        color: #ccc;
+        font-style: italic;
+        font-weight: normal;
+    }
+
+    .select-search-box input:-ms-input-placeholder {
+        color: #ccc;
+        font-style: italic;
+        font-weight: normal;
+    }
+
+    input[type='search']::-webkit-search-cancel-button, input[type='search']::-webkit-search-decoration {
+        -webkit-appearance: none;
+    }
+
+    .select-search-box__select {
+        display: none;
+        position: absolute;
+        top: 51px;
+        left: 0;
+        right: 0;
+        background: #000;
+        border-radius: 4px;
+        overflow: auto;
+        box-shadow: 0 7px 14px 0 rgba(50, 50, 93, 0.1), 0 3px 6px 0 rgba(0, 0, 0, 0.07);
+        z-index: 100;
+        min-height: 49px;
+    }
+
+    .select-search-box--multiple .select-search-box__select {
+        display: block;
+        position: static;
+        border-top: 1px solid #eee;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+        .select-search-box__select--display {
+            display: block;
+        }
+
+    .select-search-box__option {
+        font-size: 17px;
+        font-family: 'Varela Round', sans-serif;
+        font-weight: 450;
+        color: #ffffff;
+        padding: 13px 13px;
+        border-top: 1px solid #eee;
+        cursor: pointer;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        user-select: none;
+    }
+    .select-search-box__options{
+        padding:0;
+        // margin-left: 15px;
+    }
+        .select-search-box__option:first-child {
+            border-top: none;
+        }
+
+        .select-search-box__option--hover, .select-search-box__option:hover {
+            background:#ffb300;
+        }
+
+        .select-search-box__option--selected {
+            background: #54A0FF;
+            color: #fff;
+            border-top-color: #2184ff;
+        }
+
+            .select-search-box__option--selected:hover, .select-search-box__option--selected.select-search-box__option--hover {
+                background: #2184ff;
+                color: #fff;
+                border-top-color: #2184ff;
+            }
+
+        .select-search-box__group {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            position: relative;
+        }
+
+        .select-search-box__group-header {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 0 10px;
+            color: rgba(0, 0, 0, 0.5);
+            font-size: 12px;
+        }
