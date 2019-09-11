@@ -4,5 +4,22 @@
     width: 100%;
     display: inline-flex;
     justify-content: center;
+    z-index: 2;
+    font-weight: bold;
+    color: white;
+}
 
+.mainpage:before{
+    position:absolute;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #10101066;
+    content: '';
+    opacity: 0.3;
+}
+
+.titles{
+    z-index: 2;
 }

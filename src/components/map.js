@@ -1,4 +1,3 @@
-/*global google*/
 import React, { Component } from "react";
 import {
     withGoogleMap,
@@ -17,9 +16,11 @@ class Map extends Component {
         console.log("Component Mounted")
         const directionsService = new google.maps.DirectionsService();
         console.log(this.props.origin.lat)
-        let lat = this.props.origin.lat
-        let lng = this.props.origin.lng
+        let lat = parseFloat(this.props.origin.lat)
+        let lng = parseFloat(this.props.origin.lng)
+        console.log(lat, lng)
         const origin = { lat, lng };
+        console.log(origin)
         const destination = { lat: this.props.destination.lat, lng: this.props.destination.lng };
 
         directionsService.route(

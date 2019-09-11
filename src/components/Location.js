@@ -3,14 +3,15 @@ import { Form, FormGroup, Input, Button } from 'reactstrap';
 import { nearby } from '../actions/maps';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router';
-import SelectSearch from 'react-select-search'
+import SelectSearch from 'react-select-search';
+import axios from 'axios';
 
 class Location extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             "Location": "",
-            "Category": "",
+            "Category": "restaurant",
             "Feature": "prominent"
         }
         this.options = [
@@ -118,13 +119,20 @@ class Location extends React.Component {
         }
     }
     showPosition(position) {
-
+        Location = {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+        }
+        this.props.nearby(Location, this.state.Category, this.state.Feature)
+        this.props.history.push("/results")
     }
 
     onSubmit(e) {
         e.preventDefault()
+        console.log("running")
         this.props.nearby(this.state.Location, this.state.Category, this.state.Feature)
-        this.props.history.push("/results")
+        // this.props.history.push("/results")
+        return <Redirect to="/results"/>
     }
     render() {
         return (
@@ -132,7 +140,7 @@ class Location extends React.Component {
                 <Form onSubmit={this.onSubmit} className="PlaceSearch">
                     <FormGroup className="location_search p-3">
                         <div className="row m-0 p-0">
-                            <div className="col-sm-3 mb-3 m-0 p-0 pr-3">
+                            <div className="col-sm-4 mb-3 m-0 p-0 pr-3">
                                 <div className="position-relative">
                                     <input
                                         placeholder="Enter Location"
@@ -142,7 +150,7 @@ class Location extends React.Component {
                                         }))}
                                         required
                                     />
-                                    <span className="icon_container"><i class="fa fa-map-marker" onClick={this.getLocation}></i></span>
+                                    <span className="icon_container"><i className="fa fa-map-marker" onClick={this.getLocation}></i></span>
                                 </div>
                             </div>
 
@@ -173,7 +181,7 @@ class Location extends React.Component {
                                 </Input>
                             </div>
 
-                            <div className="col-sm-3">
+                            <div className="col-sm-2 m-0 p-0">
                                 <button className="button">
                                     <span><i className="fa fa-search mr-3" aria-hidden="true" /></span>Search
                             </button>
@@ -181,51 +189,51 @@ class Location extends React.Component {
                         </div>
                     </FormGroup>
                 </Form>
-                <div className="d-flex align-content-stretch flex-wrap justify-content-center">
+                <div className="d-flex align-content-stretch flex-wrap justify-content-center titles">
                     <div>
-                        <div className="list-items">
+                        <div className="list-items m-3">
                             <div className="icon-box">
-                                <i class="fa fa-building" aria-hidden="true"></i>
+                                <i className="fa fa-building icon" aria-hidden="true"></i>
                             </div>
                             <h5>Hotels</h5>
                         </div>
                     </div>
 
                     <div>
-                        <div className="list-items">
+                        <div className="list-items m-3">
                             <div className="icon-box">
-                                <i class="fas fa-spa"></i>
+                                <i className="fas fa-spa icon"></i>
                             </div>
                             <h5>Beauty & Spa</h5>
                         </div>
                     </div>
 
                     <div>
-                        <div className="list-items"><div className="icon-box">
-                            <i class="fas fa-glass-cheers"></i>
+                        <div className="list-items m-3"><div className="icon-box">
+                            <i className="fas fa-glass-cheers icon"></i>
                         </div>
                             <h5>Nightlife</h5></div>
                     </div>
 
                     <div >
-                        <div className="list-items"><div className="icon-box">
-                            <i class="fas fa-utensils"></i>
+                        <div className="list-items m-3"><div className="icon-box">
+                            <i className="fas fa-utensils icon"></i>
                         </div>
                             <h5>Restaurant</h5></div>
                     </div>
 
                     <div>
-                        <div className="list-items"><div className="icon-box">
-                            <i class="fas fa-shopping-bag"></i>
+                        <div className="list-items m-3"><div className="icon-box">
+                            <i className="fas fa-shopping-bag icon"></i>
                         </div>
                             <h5>Shopping</h5>
                         </div>
                     </div>
 
                     <div>
-                        <div className="list-items">
+                        <div className="list-items m-3">
                             <div className="icon-box">
-                                <i class="fas fa-tshirt"></i>
+                                <i className="fas fa-tshirt icon"></i>
                             </div>
                             <h5>Clothing Store</h5>
                         </div>

@@ -2,6 +2,8 @@ import React from 'react';
 import Header from './Header';
 import Logout from './Logout';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
 
 class HomePage extends React.Component {
 
@@ -22,5 +24,5 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps)(HomePage)
+export default withRouter(connect(mapStateToProps)(HomePage))
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
+    Card, Button
 } from 'reactstrap';
 import axios from 'axios';
 import { connect } from 'react-redux';

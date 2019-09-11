@@ -17,6 +17,33 @@
     cursor: pointer;
 }
 
+.header_wrap{
+    height:100vh;
+    background-image:url(../images/travel.jpg);
+    height: 100%; 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.icon{
+    font-size:37px;
+}
+
+.icon-box>i{
+    color: white;
+}
+
+.list-items>h5{
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 0px;
+    border-radius: 0px 0px 10px 10px;
+    background-color: #efc324;
+    padding: 7px 0px;
+    color: #272727;
+    font-weight: 400;
+}
 
 [class*="fontawesome-"]:before {
     font-family: 'Varela Round', sans-serif;
@@ -32,6 +59,13 @@
     font-family: 'Varela Round', sans-serif;
     padding: 10px;
 }
+
+.icon-box{
+    width: 100%;
+    padding: 10px;
+    height: 100%;
+    background-color: #0000004a;
+}
 .locate{
     height: 50px;
     // width: 250px;
@@ -45,8 +79,9 @@
 
 .button{
     height: 50px;
-    width:130px;
+    width:100%;
     font-family: 'Varela Round', sans-serif;
+    padding: 10px 7px;
     font-size: 16px;
     background-color: #efc323;
     border: none;
@@ -55,11 +90,10 @@
 
 .list-items{
     text-align: center;
-    border: 1px solid #ff3a54;
+    border: 1px solid #efc324;
     border-radius: 10px;
     overflow: hidden;
     width: 200px;
-    padding:10px;
 }
 
 .hotel:before{
@@ -263,4 +297,10 @@
             padding: 0 10px;
             color: rgba(0, 0, 0, 0.5);
             font-size: 12px;
+        }
+
+        @media only screen and (max-width: 800px) {
+            .heading {
+                font-size: 12px;
+            }
         }
