@@ -28,3 +28,20 @@ formatted_address: null,
             <option value="Bars and pubs">Bars and Pubs</option>
             <option value="amusement park">Amusement Park</option>
           </Input>
+          // {props.data.price_level && <div><span>Price Level</span>{props.data.price_level}</div>}
+          {
+  props.loadedData.reviews.map((item, pos) => {
+    Object.keys({ item }).map((field, index) => (
+      <li key={{ index } + 1}><span>{field}:</span>{item.field}</li>
+    ))
+  }
+  )
+}
+{
+  props.loadedData.reviews.length > 0 && (
+    <ul>
+      {props.loadedData.reviews.map((item, index) => (
+        item.field == "author_name" ? <p>{item.author_name}</p> : ''
+      ))}
+    </ul>)
+}

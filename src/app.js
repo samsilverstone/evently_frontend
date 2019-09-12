@@ -29,7 +29,7 @@ const routes = (
                 <Route exact path="/results" component={Results} />
                 <Route component={NotFoundPage} />
             </Switch>
-        </BrowserRouter>
+        </BrowserRouter> 
     </Provider >
 )
 

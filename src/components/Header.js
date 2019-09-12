@@ -1,8 +1,10 @@
 import React from 'react';
 import Location from './Location';
+import { withRouter } from 'react-router';
 
-export default class Header extends React.Component {
+class Header extends React.Component {
     render() {
+        console.log("header")
         return (
             <div className="header_wrap">
                 <div className="mainpage w-100 h-100">
@@ -15,3 +17,5 @@ export default class Header extends React.Component {
         )
     }
 }
+
+export default withRouter(Header)

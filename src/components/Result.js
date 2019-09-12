@@ -7,7 +7,9 @@ import { connect } from 'react-redux';
 import PlaceDetails from './PlaceDetails';
 import MapViewModal from './MapViewModal';
 import Loader from './loader';
-
+import {
+    withRouter
+} from 'react-router-dom'
 
 class Result extends React.Component {
     constructor(props) {
@@ -31,10 +33,11 @@ class Result extends React.Component {
             })
     }
 
+
     modalOpen() {
         this.setState({ loader: true })
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        fetch(proxyurl + `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${this.props.data.photo}&key=AIzaSyA4mI-Wb-OWrtHlste2j8GbuFdD4CvzYbQ`)
+        fetch(proxyurl + `https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=300&photoreference=${this.props.data.photo}&key=AIzaSyA4mI-Wb-OWrtHlste2j8GbuFdD4CvzYbQ`)
             .then((response) => response.blob())
             .then(images => {
                 let image = URL.createObjectURL(images)
@@ -60,7 +63,7 @@ class Result extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Card className="mb-4">
+                <Card className="mb-4 indivi_item">
                     {this.props.data.name ? <div className="bg-success p-3 mb-3"><h2>{this.props.data.name}</h2></div> : undefined}
                     <ul className="list-group list-group-flush list-unstyled">
                         {this.props.data.open_now ? <li className="list-group-item">{this.props.data.open_now.open_now ? <React.Fragment><span className="font-weight-bold w-25 d-inline-block">Open Now</span>Open</React.Fragment> : <React.Fragment><span className="font-weight-bold w-25">Open Now:</span>Closed</React.Fragment>}</li> : <React.Fragment><span className="font-weight-bold">Open Now:</span>No Information Available</React.Fragment>}
@@ -73,6 +76,7 @@ class Result extends React.Component {
                     {this.state.isOpen && <MapViewModal
                         isModalVisible={this.state}
                         isModalClosed={this.modalClose}
+                        data={this.props.data}
                     />}
                     {this.props.isLoading || !(this.props.locationInfo.place_id === this.props.data.place_id) ? <Button onClick={this.loadDetails}>Show More</Button> : <PlaceDetails loadedData={this.props.locationInfo} />}
                 </Card>
@@ -100,4 +104,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Result)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Result))

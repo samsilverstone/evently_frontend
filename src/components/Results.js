@@ -2,9 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-redux';
 import Result from './Result';
-import debounce from 'lodash.debounce';
+// import debounce from 'lodash.debounce';
 import Loader from './loader';
 import axios from 'axios';
+import InfiniteLoader from 'react-infinite-loader'
+
 
 class Results extends React.Component {
     constructor(props) {
@@ -15,19 +17,7 @@ class Results extends React.Component {
         this.affordable = this.affordable.bind(this)
         this.loadData = this.loadData.bind(this)
 
-        window.onscroll = debounce(() => {
-            const {
-                loadData,
-                state: {
-                    isLoading,
-                },
-            } = this
 
-            if (isLoading) return
-            if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
-                loadData();
-            }
-        }, 1000)
     }
 
     loadData() {
@@ -64,6 +54,7 @@ class Results extends React.Component {
             <React.Fragment>
                 <div className="result">
                     {this.props.nearbydata.length > 0 ? this.props.nearbydata.map((item, index) => <Result key={index} data={item} origin={this.props.origin} serial={index + 1} compute={this.affordable} />) : undefined}
+                    <InfiniteLoader onVisited={() => this.loadData()} />
                 </div>
             </React.Fragment>
         )

@@ -33,8 +33,12 @@ const MapViewModal = (props) => {
                     destination={props.isModalVisible.destination}
                 />
             </div>
-            <div className="col-sm-6"><img src={props.isModalVisible.image} /></div>
-            <div>Hello</div>
+            <div className="col-sm-6"><img src={props.isModalVisible.image} />
+                {props.data.name && <div><span>Name</span>{props.data.name}</div>}
+                {props.data.open_now && <div><span>Open Now</span>{props.data.open_now.open_now ? 'True' : 'False'}</div>}
+                {props.data.rating && <div><span>Rating</span>{props.data.rating}</div>}
+                {props.data.user_ratings_total && <div><span>Total User Rating</span>{props.data.user_ratings_total}</div>}
+            </div>
         </div>
     </Modal>
     )
