@@ -8,6 +8,7 @@ import SignUp from './components/SignUp';
 import NotFoundPage from './components/NotFoundPage';
 import ForgotPass from './components/forgotpassword';
 import ResetPassword from './components/ResetPassword';
+import PlaceInfo from './components/PlaceInfo';
 import './Styles/styles.scss';
 import Results from './components/Results';
 import { createStore, applyMiddleware } from "redux";
@@ -27,9 +28,10 @@ const routes = (
                 <Route exact path="/passreset" component={ResetPassword} />
                 <Route exact path="/forgotpassword" component={ForgotPass} />
                 <Route exact path="/results" component={Results} />
+                <Route name="user" path="/:place" component={PlaceInfo} />
                 <Route component={NotFoundPage} />
             </Switch>
-        </BrowserRouter> 
+        </BrowserRouter>
     </Provider >
 )
 

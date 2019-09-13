@@ -6,6 +6,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import PlaceDetails from './PlaceDetails';
 import MapViewModal from './MapViewModal';
+import { Link } from 'react-router';
 import Loader from './loader';
 import {
     withRouter
@@ -64,7 +65,7 @@ class Result extends React.Component {
         return (
             <React.Fragment>
                 <Card className="mb-4 indivi_item">
-                    {this.props.data.name ? <div className="bg-success p-3 mb-3"><h2>{this.props.data.name}</h2></div> : undefined}
+                    {this.props.data.name ? <div className="bg-success p-3 mb-3"><h2><Link to={`/users/${this.props.data.name}`}>{this.props.data.name}</Link></h2></div> : undefined}
                     <ul className="list-group list-group-flush list-unstyled">
                         {this.props.data.open_now ? <li className="list-group-item">{this.props.data.open_now.open_now ? <React.Fragment><span className="font-weight-bold w-25 d-inline-block">Open Now</span>Open</React.Fragment> : <React.Fragment><span className="font-weight-bold w-25">Open Now:</span>Closed</React.Fragment>}</li> : <React.Fragment><span className="font-weight-bold">Open Now:</span>No Information Available</React.Fragment>}
                         {this.props.data.price_level ? <li className="list-group-item"><span className="font-weight-bold w-25">Affordability:</span>{this.props.compute(this.props.data.price_level)}</li> : <li className="list-group-item"><span className="font-weight-bold w-25 d-inline-block">Affordability:</span>No Information Available</li>}

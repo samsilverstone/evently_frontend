@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, CardImg, CardBody, CardTitle, CardText } from 'reactstrap';
+import { Card } from 'reactstrap';
 
 const PlaceDetails = (props) => {
     return (
