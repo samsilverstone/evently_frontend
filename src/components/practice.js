@@ -45,3 +45,4 @@ formatted_address: null,
       ))}
     </ul>)
 }
+{this.props.data.name ? <div className="bg-success p-3 mb-3"><h2><</h2></div> : undefined}

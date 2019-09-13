@@ -18,6 +18,12 @@ export default function (state = initialState, action) {
                 isLoading: false,
                 data: action.data
             }
+        case 'INFO_RESET':
+            return {
+                ...state,
+                isLoading: true,
+                data: []
+            }
 
         default:
             return state

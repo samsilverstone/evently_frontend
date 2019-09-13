@@ -11,12 +11,16 @@ import ResetPassword from './components/ResetPassword';
 import PlaceInfo from './components/PlaceInfo';
 import './Styles/styles.scss';
 import Results from './components/Results';
-import { createStore, applyMiddleware } from "redux";
+import { componse, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { Provider } from 'react-redux';
 import App from './combinereducers';
+import { autoRehydrate, persistStore } from 'redux-persist';
 
-let store = createStore(App, applyMiddleware(thunk))
+
+let store = compose(autoRehydrate())(createStore(App, applyMiddleware(thunk)))
+
+persistStore(store)
 
 const routes = (
     <Provider store={store}>
@@ -28,7 +32,7 @@ const routes = (
                 <Route exact path="/passreset" component={ResetPassword} />
                 <Route exact path="/forgotpassword" component={ForgotPass} />
                 <Route exact path="/results" component={Results} />
-                <Route name="user" path="/:place" component={PlaceInfo} />
+                <Route name="user" path="/place/:place" component={PlaceInfo} />
                 <Route component={NotFoundPage} />
             </Switch>
         </BrowserRouter>
@@ -37,3 +41,4 @@ const routes = (
 
 ReactDOM.render(routes, document.getElementById('app'))
 
+export default store

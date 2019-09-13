@@ -16,8 +16,21 @@ class Results extends React.Component {
         }
         this.affordable = this.affordable.bind(this)
         this.loadData = this.loadData.bind(this)
+        this.resetStore = this.resetStore.bind(this)
+    }
 
+    resetStore(e) {
+        console.log("Results-------->", e)
+        this.props.reset()
+    }
 
+    componentDidMount() {
+        console.log("Result component Mounted")
+    }
+
+    componentWillUnmount() {
+        window.onpopstate = this.resetStore
+        console.log("Result component Unmounted")
     }
 
     loadData() {
@@ -78,7 +91,8 @@ const mapStateToProps = (state, ownprops) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadData: (fetchedData) => dispatch({ type: 'NEXT_PAGE_DATA', data: fetchedData })
+        loadData: (fetchedData) => dispatch({ type: 'NEXT_PAGE_DATA', data: fetchedData }),
+        reset: () => dispatch({ type: 'RESET' })
     }
 }
 

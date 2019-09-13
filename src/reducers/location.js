@@ -20,6 +20,13 @@ export default function (state = initialState, action) {
                 origin: action.data.origin
             }
 
+        case 'RESET':
+            return {
+                ...state,
+                nearbyData: [],
+                isLoading: true,
+                next_page_token: null
+            }
         default:
             return state
     }
