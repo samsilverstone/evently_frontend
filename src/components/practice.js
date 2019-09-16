@@ -45,4 +45,12 @@ formatted_address: null,
       ))}
     </ul>)
 }
-{this.props.data.name ? <div className="bg-success p-3 mb-3"><h2><</h2></div> : undefined}
+{
+  this.props.data.name ? <div className="bg-success p-3 mb-3"><h2><</h2></div> : undefined}
+           // <Button onClick={this.modalOpen}>Map View</Button>
+                    // {this.state.loader && <Loader />}
+                    // {this.state.isOpen && <MapViewModal
+                    //     isModalVisible={this.state}
+                    //     isModalClosed={this.modalClose}
+                    //     data={this.props.data}
+                    // />}

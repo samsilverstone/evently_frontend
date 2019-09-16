@@ -16,11 +16,13 @@ import thunk from "redux-thunk";
 import { Provider } from 'react-redux';
 import App from './combinereducers';
 import { autoRehydrate, persistStore } from 'redux-persist';
+import loadState from './components/localstorage';
 
 
-let store = compose(autoRehydrate())(createStore(App, applyMiddleware(thunk)))
+let store = createStore(App,
+    persistedState,
+    applyMiddleware(thunk))
 
-persistStore(store)
 
 const routes = (
     <Provider store={store}>
@@ -32,12 +34,18 @@ const routes = (
                 <Route exact path="/passreset" component={ResetPassword} />
                 <Route exact path="/forgotpassword" component={ForgotPass} />
                 <Route exact path="/results" component={Results} />
-                <Route name="user" path="/place/:place" component={PlaceInfo} />
+                <Route name="user" path="/place/:place/:id" component={PlaceInfo} />
                 <Route component={NotFoundPage} />
             </Switch>
         </BrowserRouter>
     </Provider >
 )
+
+store.subscribe(() => {
+    saveState({
+        todos: store.getState().todos
+    });
+});
 
 ReactDOM.render(routes, document.getElementById('app'))
 
