@@ -16,19 +16,15 @@ class PlaceInfo extends React.Component {
             destination: null,
             image: null
         }
-        this.resetStore = this.resetStore.bind(this)
+        this.resetState = this.resetState.bind(this)
         this.data = queryString.parse(location.search)
-        // console.log("PlaceInfo", this.data.org_lat)
-        // console.log("PlaceInfo", this.data.org_lng)
-        console.log(this.data)
     }
-    resetStore(e) {
-        console.log("placeInfo---->", e)
+    resetState(e) {
+        console.log("PlaceInfo", e)
         this.props.dispatch({ type: 'INFO_RESET' })
     }
     componentDidMount() {
         console.log("PlaceInfo component mounted")
-        console.log()
         this.setState({ loader: true })
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         fetch(proxyurl + `https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=300&photoreference=${this.props.match.params.id}&key=AIzaSyA4mI-Wb-OWrtHlste2j8GbuFdD4CvzYbQ`)
@@ -48,14 +44,10 @@ class PlaceInfo extends React.Component {
             })
     }
     componentWillUnmount() {
-        window.onpopstate = this.resetStore
+        window.onpopstate = this.resetState()
         console.log("PlaceInfo component Umounted")
     }
-    modalClose() {
-        this.setState({
-            isOpen: false
-        })
-    }
+
 
 
     render() {

@@ -4,7 +4,6 @@ import Result from './Result';
 import Loader from './loader';
 import axios from 'axios';
 import InfiniteLoader from 'react-infinite-loader'
-import { persistor } from '../combinereducers'
 
 class Results extends React.Component {
     constructor(props) {
@@ -18,17 +17,19 @@ class Results extends React.Component {
     }
 
     resetStore(e) {
-        console.log("Results-------->", e)
-        persistor.purge()
+        console.log("Results", e)
         this.props.reset()
+        localStorage.removeItem("persist:app")
     }
 
     componentDidMount() {
+        window.onpopstate = this.resetStore
+        console.log(this.props)
         console.log("Results component Mounted")
     }
 
     componentWillUnmount() {
-        window.onpopstate = this.resetStore
+        // window.onpopstate = null
         console.log("Result component Unmounted")
     }
 

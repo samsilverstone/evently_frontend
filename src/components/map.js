@@ -13,16 +13,11 @@ class Map extends Component {
     }
 
     componentDidMount() {
-        console.log("Component Mounted")
         const directionsService = new google.maps.DirectionsService();
         let lat = parseFloat(this.props.origin_lat)
         let lng = parseFloat(this.props.origin_lng)
-        console.log("lat---->", lat, lng)
-        console.log("Latitude", this.props.origin_lat, this.props.origin_lng)
         const origin = { lat, lng }
-        console.log("Des", this.props.dest_lat, this.props.dest_lng)
         const destination = { lat: parseFloat(this.props.dest_lat), lng: parseFloat(this.props.dest_lng) };
-        console.log(destination)
 
         directionsService.route(
             {
@@ -46,12 +41,10 @@ class Map extends Component {
         this.setState({
             directions: null
         })
-        console.log("Component Unmounted")
     }
 
     render() {
-        console.log("---->", this.props.origin)
-        console.log("------>", this.props.destination)
+
         const GoogleMapExample = withGoogleMap(props => (
             <GoogleMap
                 defaultCenter={{ lat: 40.756795, lng: -73.954298 }}
