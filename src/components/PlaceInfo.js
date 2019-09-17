@@ -17,7 +17,6 @@ class PlaceInfo extends React.Component {
             image: null
         }
         this.resetStore = this.resetStore.bind(this)
-        this.modalOpen = this.modalOpen.bind(this)
         this.data = queryString.parse(location.search)
         // console.log("PlaceInfo", this.data.org_lat)
         // console.log("PlaceInfo", this.data.org_lng)
@@ -57,25 +56,7 @@ class PlaceInfo extends React.Component {
             isOpen: false
         })
     }
-    modalOpen() {
-        this.setState({ loader: true })
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        fetch(proxyurl + `https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=300&photoreference=${this.props.match.params.id}&key=AIzaSyA4mI-Wb-OWrtHlste2j8GbuFdD4CvzYbQ`)
-            .then((response) => response.blob())
-            .then(images => {
-                let image = URL.createObjectURL(images)
-                this.setState((prevSate) => {
 
-                    return {
-                        isOpen: true,
-                        origin: this.props.origin,
-                        destination: this.props.data.destination || prevSate.destination,
-                        loader: false,
-                        image
-                    }
-                })
-            })
-    }
 
     render() {
         if (this.props.isLoading) {
@@ -105,7 +86,7 @@ class PlaceInfo extends React.Component {
                     <div className="individual_item"><span className="span_style">Website</span>{typeof (this.props.loadedData.website) === 'string' ? <div className="div_style">{this.props.loadedData.website}</div> : <div className="div_style">NA</div>}</div>
                     <div className="individual_item">
                         <span className="span_style">Reviews</span>
-                        {this.props.loadedData.reviews.length > 0 && (
+                        {this.props.loadedData.reviews && this.props.loadedData.reviews.length > 0 && (
                             <ul>
                                 {this.props.loadedData.reviews.map((item, index) => (
                                     <Card className="mb-4 d-flex flex-row" width="50px" height="50px" key={index}>
@@ -140,6 +121,7 @@ const mapStateToProps = (state) => {
             isLoading: state.locationDetails.isLoading
         }
     }
+    console.log(state.locationDetails)
     return {
         isLoading: state.locationDetails.isLoading,
         loadedData: state.locationDetails.data.data

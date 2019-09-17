@@ -132,8 +132,8 @@ class Location extends React.Component {
         console.log("running")
         this.props.nearby(this.state.Location, this.state.Category, this.state.Feature)
         this.props.history.push("/results")
-        // return <Redirect to="/results"/>
     }
+    
     render() {
         return (
             <React.Fragment>

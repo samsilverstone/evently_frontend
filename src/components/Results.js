@@ -1,12 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-redux';
 import Result from './Result';
-// import debounce from 'lodash.debounce';
 import Loader from './loader';
 import axios from 'axios';
 import InfiniteLoader from 'react-infinite-loader'
-
+import { persistor } from '../combinereducers'
 
 class Results extends React.Component {
     constructor(props) {
@@ -21,11 +19,12 @@ class Results extends React.Component {
 
     resetStore(e) {
         console.log("Results-------->", e)
+        persistor.purge()
         this.props.reset()
     }
 
     componentDidMount() {
-        console.log("Result component Mounted")
+        console.log("Results component Mounted")
     }
 
     componentWillUnmount() {
@@ -76,6 +75,7 @@ class Results extends React.Component {
 }
 
 const mapStateToProps = (state, ownprops) => {
+    console.log(state)
     if (state.location.isLoading) {
         return {
             isLoading: state.location.isLoading

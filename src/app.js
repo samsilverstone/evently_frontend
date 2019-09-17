@@ -11,41 +11,35 @@ import ResetPassword from './components/ResetPassword';
 import PlaceInfo from './components/PlaceInfo';
 import './Styles/styles.scss';
 import Results from './components/Results';
-import { componse, createStore, applyMiddleware } from "redux";
-import thunk from "redux-thunk";
 import { Provider } from 'react-redux';
-import App from './combinereducers';
-import { autoRehydrate, persistStore } from 'redux-persist';
-import loadState from './components/localstorage';
+import { PersistGate } from 'redux-persist/lib/integration/react';
+import Loading from './components/loader';
+import { persistor, store } from '../src/combinereducers';
 
 
-let store = createStore(App,
-    persistedState,
-    applyMiddleware(thunk))
+
 
 
 const routes = (
     <Provider store={store}>
-        <BrowserRouter>
-            <Switch>
-                <Route exact path="/" component={HomePage} />
-                <Route exact path="/login" component={LoginPage} />
-                <Route exact path="/signup" component={SignUp} />
-                <Route exact path="/passreset" component={ResetPassword} />
-                <Route exact path="/forgotpassword" component={ForgotPass} />
-                <Route exact path="/results" component={Results} />
-                <Route name="user" path="/place/:place/:id" component={PlaceInfo} />
-                <Route component={NotFoundPage} />
-            </Switch>
-        </BrowserRouter>
+        <PersistGate loading={<Loading />} persistor={persistor}>
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/" component={HomePage} />
+                    <Route exact path="/login" component={LoginPage} />
+                    <Route exact path="/signup" component={SignUp} />
+                    <Route exact path="/passreset" component={ResetPassword} />
+                    <Route exact path="/forgotpassword" component={ForgotPass} />
+                    <Route exact path="/results" component={Results} />
+                    <Route name="user" path="/place/:place/:id" component={PlaceInfo} />
+                    <Route component={NotFoundPage} />
+                </Switch>
+            </BrowserRouter>
+        </PersistGate>
     </Provider >
 )
 
-store.subscribe(() => {
-    saveState({
-        todos: store.getState().todos
-    });
-});
+
 
 ReactDOM.render(routes, document.getElementById('app'))
 

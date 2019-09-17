@@ -23,9 +23,11 @@ class Result extends React.Component {
             image: null
         }
         this.loadDetails = this.loadDetails.bind(this)
-        this.modalOpen = this.modalOpen.bind(this)
-        this.modalClose = this.modalClose.bind(this)
         console.log(this.props.data.destination)
+    }
+
+    componentDidMount() {
+        console.log("Result component mounted")
     }
 
     loadDetails() {
@@ -36,25 +38,6 @@ class Result extends React.Component {
     }
 
 
-    modalOpen() {
-        this.setState({ loader: true })
-        const proxyurl = "https://cors-anywhere.herokuapp.com/";
-        fetch(proxyurl + `https://maps.googleapis.com/maps/api/place/photo?maxwidth=600&maxheight=300&photoreference=${this.props.data.photo}&key=AIzaSyA4mI-Wb-OWrtHlste2j8GbuFdD4CvzYbQ`)
-            .then((response) => response.blob())
-            .then(images => {
-                let image = URL.createObjectURL(images)
-                this.setState((prevSate) => {
-
-                    return {
-                        isOpen: true,
-                        origin: this.props.origin,
-                        destination: this.props.data.destination || prevSate.destination,
-                        loader: false,
-                        image
-                    }
-                })
-            })
-    }
 
     modalClose() {
         this.setState({
@@ -79,18 +62,6 @@ class Result extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    if (state.locationDetails.isLoading) {
-        return {
-            isLoading: true
-        }
-    }
-    // console.log(state.locationDetails.data.data)
-    return {
-        isLoading: state.locationDetails.isLoading,
-        locationInfo: state.locationDetails.data.data
-    }
-}
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -98,4 +69,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Result))
+export default withRouter(connect(null, mapDispatchToProps)(Result))

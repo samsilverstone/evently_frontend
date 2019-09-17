@@ -1,3 +1,5 @@
+// import { REHYDRATE } from 'redux-persist';
+
 const initialState = {
     data: [],
     isLoading: true
@@ -12,7 +14,7 @@ export default function (state = initialState, action) {
             }
 
         case 'INFO_LOADED':
-            console.log(action.data)
+            console.log("action.data", action.data)
             return {
                 ...state,
                 isLoading: false,
@@ -23,6 +25,13 @@ export default function (state = initialState, action) {
                 ...state,
                 isLoading: true,
                 data: []
+            }
+
+        case 'REHYDRATE':
+            console.log("rehydrate locationdetails running")
+            return {
+                isLoading: action.payload.isLoading,
+                data: action.payload.data
             }
 
         default:

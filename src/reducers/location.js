@@ -1,4 +1,4 @@
-import saveState from '../components/localstorage'
+// import { REHYDRATE } from 'redux-persist';
 
 const initialState = {
     nearbyData: [],
@@ -15,12 +15,7 @@ export default function (state = initialState, action) {
             }
         case 'NEXT_PAGE_DATA':
         case 'DATA LOADED':
-            saveState({
-                nearbyData: state.nearbyData.concat(action.data.data),
-                next_page_token: action.data.nextpagetoken,
-                isLoading: false,
-                origin: action.data.origin
-            })
+            console.log(state.nearbyData)
             return {
                 nearbyData: state.nearbyData.concat(action.data.data),
                 next_page_token: action.data.nextpagetoken,
@@ -35,6 +30,16 @@ export default function (state = initialState, action) {
                 isLoading: true,
                 next_page_token: null
             }
+
+        case 'REHYDRATE':
+            console.log("Rehydrate location running")
+            return {
+                nearbyData: action.payload.nearbyData,
+                isLoading: action.payload.isLoading,
+                next_page_token: action.payload.next_page_token,
+                origin: action.payload.origin
+            };
+
         default:
             return state
     }
